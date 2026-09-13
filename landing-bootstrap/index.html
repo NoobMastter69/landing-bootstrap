@@ -6,6 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Titulo</title>
   <link rel="stylesheet" href="bootstrap.css">
+  <!-- coloquei esse style DEPOIS do link do bootstrap de proposito.
+       a minha classe .btn-cta tem a mesma especificidade que a .btn-primary do
+       bootstrap (uma classe cada), entao as duas empatam. quando empata, quem
+       ganha e a regra que vem por ultimo no codigo. se eu colocasse esse style
+       antes do link, o bootstrap ia sobrescrever e o botao continuaria roxo.
+       mexi nas variaveis --bs-btn-* em vez do background-color direto porque
+       o .btn:hover tem especificidade maior e ia voltar a cor original no hover. -->
   <style>
     .btn-cta {
   --bs-btn-bg: #e85d04;
@@ -19,8 +26,14 @@
 </head>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
   integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-</footer>
 <body>
+  <!-- data-bs-theme="dark" so na navbar, nao na pagina inteira.
+       esse atributo troca o valor das variaveis de cor do bootstrap aqui dentro,
+       e a navbar muda de cara porque ela e um componente pronto que ja le essas
+       variaveis. numa div vazia nao ia acontecer nada, porque nao teria ninguem
+       usando as variaveis.
+       e diferente do prefers-color-scheme que vimos na outra aula: la quem
+       decidia era o sistema do usuario, aqui sou eu que escolho no html. -->
   <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Alugue seu tênis</a>
@@ -66,9 +79,19 @@
     <div class="container">
       <h1 class="display-4 fw-bold mb-3">O melhor lugar para se alugar um tênis.</h1>
       <p class="lead mb-4">De tênis em tênis, buscamos a confiança e a segurança dos nossos clientes.</p>
+      <!-- inspecionei esse botao no devtools (aba Styles) e contei o que o
+           bootstrap ja aplica nele: 47 declaracoes, sendo 22 propriedades css
+           e 25 variaveis --bs-btn-*, sem contar os estados :hover, :focus e
+           :active. e todo esse css que eu nao precisei escrever na mao. -->
       <a href="#destaques" class="btn btn-primary btn-lg px-4 btn-cta">Ver modelos</a>
     </div>
   </section>
+  <!-- usei col-md-4 aqui: 3 x 4 = 12, que e o total de colunas do grid.
+       o breakpoint md comeca em 768px, que e largura de tablet, entao os cards
+       ficam lado a lado de tablet pra cima e empilham sozinhos abaixo disso.
+       testei estreitando a janela: em 800px ficam em linha, em 767px empilham.
+       se eu usasse col-sm-4 (576px) eles iam ficar espremidos em celular grande.
+       e o melhor: nao escrevi nenhuma media query, o bootstrap ja faz isso. -->
   <section class="Section2 py-5" id="destaques">
     <div class="container">
       <div class="row g-4">
